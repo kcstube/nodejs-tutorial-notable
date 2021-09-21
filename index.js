@@ -5,10 +5,33 @@ const mongodb = require('mongodb')
 // アプリケーションの作成
 const app = express()
 
+// メモを保存しておく変数
+let memoList = [
+    {
+        "memo": "テスト",
+        "sender": "テスト投稿者"
+    }
+]
+
 // ルーティングの設定
-app.get("/sample", (req, res) => {
-    console.log("/sample is called.")
-    res.send("Hello")
+// getリクエスト
+app.get("/memos", (req, res) => {
+    console.log("/memos (GET) is called.")
+    let json = JSON.stringify(memoList)
+    res.send(json)
+})
+
+// postリクエスト
+app.post("/memos", (req, res) => {
+    let memo = req.body.memo
+    let sender = req.body.sender
+    let newData = {
+        "memo": memo,
+        "sender": sender
+    }
+    console.log(newData)
+    memoList.push(newData)
+    res.send("メモを登録しました")
 })
 
 // サーバーの起動
