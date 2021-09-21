@@ -5,6 +5,9 @@ const mongodb = require('mongodb')
 // アプリケーションの作成
 const app = express()
 
+// POSTリクエストのJSONを受け取るために必要なコード
+app.use(express.json())
+
 // メモを保存しておく変数
 let memoList = [
     {
